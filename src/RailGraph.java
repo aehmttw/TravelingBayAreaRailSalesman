@@ -54,8 +54,6 @@ public class RailGraph
     public Station sloatAndStFrancis = new Station("SF Zoo");
     public Station oceanBeach = new Station("Ocean Beach");
     public Station chinatown = new Station("Chinatown - Rose Pak");
-    public Station unionSquareMarket = new Station("Union Square / Market");
-    public Station arleta = new Station("Arleta");
     public Station sunnydale = new Station("Sunnydale");
 
     public Station fremont = new Station();
@@ -76,6 +74,13 @@ public class RailGraph
     public Station greatAmerica = new Station();
     public Station sanFernando = new Station();
     public Station childrensMuseum = new Station();
+    public Station church24th = new Station();
+    public Station westPortal14th = new Station();
+    public Station castro = new Station();
+    public Station sfState = new Station();
+    public Station folsom = new Station();
+    public Station brannan4th = new Station();
+    public Station ucsf = new Station();
 
     public void init()
     {
@@ -183,5 +188,68 @@ public class RailGraph
                 .addMStop(childrensMuseum)
                 .addStop(tamien, caltrain)
                 .addStop(santaTeresa);
+
+        muniJ.addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniK, muniL, muniM, muniN)
+                .addMStop(montgomery)
+                .addStop(powell, muniT)
+                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
+                .addStop(vanNess, muniK, muniL, muniM)
+                .addStop(duboceAndChurch, muniN)
+                .addStop(church, muniK, muniM, muniL)
+                .addMStop(church24th)
+                .addStop(balboaPark, bartRed, bartYellow, bartGreen, bartBlue, muniK, muniM);
+
+        muniK.addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniL, muniM, muniN)
+                .addMStop(montgomery)
+                .addStop(powell, muniT)
+                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
+                .addStop(vanNess, muniN)
+                .addStop(church, muniJ)
+                .addMStop(castro)
+                .addStop(westPortal, muniL)
+                .addMStop(westPortal14th)
+                .addStop(sloatAndStFrancis, muniM)
+                .addMStop(church24th)
+                .addStop(balboaPark, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniM);
+
+        muniL.addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK, muniM, muniN)
+                .addMStop(montgomery)
+                .addStop(powell, muniT)
+                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
+                .addStop(vanNess, muniN)
+                .addStop(church, muniJ)
+                .addMStop(castro)
+                .addStop(westPortal, muniK, muniM)
+                .addStop(zoo);
+
+        muniM.addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniL, muniK, muniN)
+                .addMStop(montgomery)
+                .addStop(powell, muniT)
+                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
+                .addStop(vanNess, muniN)
+                .addStop(church, muniJ)
+                .addMStop(castro)
+                .addStop(westPortal, muniL)
+                .addMStop(westPortal14th)
+                .addStop(sloatAndStFrancis, muniK)
+                .addMStop(sfState)
+                .addStop(balboaPark, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK);
+
+        muniN.addStop(sf4thAndKing, caltrain, muniT)
+                .addMStop(folsom)
+                .addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK, muniM, muniL)
+                .addMStop(montgomery)
+                .addStop(powell, muniT)
+                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
+                .addStop(vanNess, muniK, muniL, muniM)
+                .addStop(duboceAndChurch, muniJ)
+                .addStop(oceanBeach);
+
+        muniT.addStop(chinatown)
+                .addStop(powell, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK, muniM, muniL, muniN)
+                .addMStop(brannan4th)
+                .addStop(sf4thAndKing, caltrain, muniN)
+                .addMStop(ucsf)
+                .addStop(sunnydale, caltrain);
     }
 }
