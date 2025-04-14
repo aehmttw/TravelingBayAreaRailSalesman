@@ -1,15 +1,31 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Station
 {
-    public String name;
-    public boolean visited = false;
+    public static HashMap<String, Station> stationsByName = new HashMap<>();
+    public static ArrayList<Station> allStations = new ArrayList<>();
 
-    public Station(String name)
+    public String name;
+    public String[] internalNames;
+
+    public boolean explored = false;
+    public boolean midpoint = false;
+
+    public Station(String name, String... otherNames)
     {
         this.name = name;
+        this.internalNames = otherNames;
+        stationsByName.put(name, this);
+        allStations.add(this);
     }
 
-    public Station()
+    public Station(String name, boolean mid)
     {
-        this.name = "midpoint";
+        this.name = name;
+        allStations.add(this);
+
+        if (mid)
+            midpoint = true;
     }
 }

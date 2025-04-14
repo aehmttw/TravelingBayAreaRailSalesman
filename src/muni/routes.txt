@@ -1,0 +1,13 @@
+route_id,agency_id,route_short_name,route_long_name,route_url,route_desc,route_type,route_color,route_text_color,route_sort_order
+CA,SFMTA,CA,CALIFORNIA STREET CABLE CAR,http://www.sfmta.com/CA,7 am-8:30 pm daily,5,B49A36 ,000000,
+F,SFMTA,F,MARKET & WHARVES,http://www.sfmta.com/F,7am-10pm daily,0,B49A36 ,000000,
+J,SFMTA,J,CHURCH,http://www.sfmta.com/J,5am-12 midnight daily,0,A96614 ,FFFFFF,
+K,SFMTA,K,INGLESIDE,http://www.sfmta.com/K,Weekdays 6am-12 midnight; weekends 8am-12 midnight,0,437C93 ,FFFFFF,
+L,SFMTA,L,TARAVAL,http://SFMTA.com/L,5am-12am daily (Every 10-20 min),0,942D83 ,FFFFFF,62
+LOWL,SFMTA,LOWL,OWL TARAVAL,http://www.sfmta.com/LOWL,10pm-5am nightly,3,666666 ,FFFFFF,
+M,SFMTA,M,OCEAN VIEW,http://www.sfmta.com/M,Weekdays 6am-12 midnight Weekends 8am-12 midnight,0,008547 ,FFFFFF,
+N,SFMTA,N,JUDAH,http://www.sfmta.com/N,Weekdays 6am-12 midnight Weekends 8am-12 midnight,0,005B95 ,FFFFFF,
+NOWL,SFMTA,NOWL,OWL JUDAH,http://www.sfmta.com/NOWL,12 midnight-5am nightly,3,666666 ,FFFFFF,
+PH,SFMTA,PH,POWELL-HYDE CABLE CAR,http://www.sfmta.com/PH,7 am-10 pm daily,5,B49A36 ,000000,
+PM,SFMTA,PM,POWELL-MASON CABLE CAR,http://www.sfmta.com/PM,7 am-10 pm daily,5,B49A36 ,000000,
+T,SFMTA,T,THIRD,http://www.sfmta.com/T,Weekends 8 am-11:30 pm,0,BF2B45 ,FFFFFF,
