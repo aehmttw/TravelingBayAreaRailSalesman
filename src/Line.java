@@ -54,7 +54,7 @@ public class Line
 
         public String toString()
         {
-            return station.name + "/" + line.name;
+            return "(" + station.region.id + ")" + station.name + "/" + line.name;
         }
 
         public boolean isTerminus()
@@ -66,8 +66,10 @@ public class Line
     public Line addStop(Station s)
     {
         Stop st = new Stop(this, s, false, new Line[0]);
+        assert !s.midpoint;
         st.index = this.stops.size();
         this.stops.add(st);
+        this.interestingStops.add(st);
         this.stopsByStation.put(s, st);
         return this;
     }
@@ -75,6 +77,7 @@ public class Line
     public Line addMStop(Station s)
     {
         Stop st = new Stop(this, s, true, new Line[0]);
+        assert s.midpoint;
         st.index = this.stops.size();
         this.stops.add(st);
         this.stopsByStation.put(s, st);
@@ -86,6 +89,7 @@ public class Line
         Stop st = new Stop(this, s, false, connections);
         st.index = this.stops.size();
         this.stops.add(st);
+        this.interestingStops.add(st);
         this.stopsByStation.put(s, st);
         return this;
     }
@@ -155,6 +159,8 @@ public class Line
 
                         prev = st.departureTimesForward[i - 2];
                     }
+
+//                    System.out.println(st + " -> " + st.departureTimesForward.length);
                 }
                 else
                 {
@@ -171,7 +177,57 @@ public class Line
 
                         prev = st.departureTimesBack[i - 2];
                     }
+
+//                    System.out.println(st + " <- " + st.departureTimesBack.length);
                 }
+            }
+        }
+    }
+
+    public void printTimetable()
+    {
+        System.out.println("Direction A");
+        for (Stop s: this.stops)
+        {
+            if (s.midpoint)
+                continue;
+
+            System.out.printf("%20s", s.station.name);
+            for (int i: s.departureTimesForward)
+                System.out.printf("%8d", i);
+            System.out.println();
+        }
+        System.out.println("Direction B");
+        for (Stop s: this.stops)
+        {
+            if (s.midpoint)
+                continue;
+
+            System.out.printf("%16s", s.station.name);
+            for (int i: s.departureTimesBack)
+                System.out.printf("%8d", i);
+            System.out.println();
+        }
+    }
+
+    public void verifyTimetable()
+    {
+        System.out.println("validating: " + this.name);
+        for (int i = 0; i < interestingStops.size() - 1; i++)
+        {
+            Stop prev = interestingStops.get(i);
+            Stop next = interestingStops.get(i + 1);
+
+            for (int f = 0; f < prev.departureTimesForward.length; f++)
+            {
+                if (!((prev.departureTimesForward[f] <= next.departureTimesForward[f]) || next.departureTimesForward[f] == -1 || (f != 0 && next.departureTimesForward[f - 1] == next.departureTimesForward[f])))
+                    throw new RuntimeException("Validation failed: " + this.name + " " + prev + "(" + prev.departureTimesForward[f] + ")" + " -> " + next + "(" + next.departureTimesForward[f] + ")");
+            }
+
+            for (int f = 0; f < prev.departureTimesBack.length; f++)
+            {
+                if (!((prev.departureTimesBack[f] >= next.departureTimesBack[f]) || next.departureTimesBack[f] == -1 || (f != 0 && next.departureTimesBack[f - 1] == next.departureTimesBack[f])))
+                    throw new RuntimeException("Validation failed: " + this.name + " " +  prev + "(" + prev.departureTimesBack[f] + ")" + " <- " + next + "(" + next.departureTimesBack[f] + ")");
             }
         }
     }

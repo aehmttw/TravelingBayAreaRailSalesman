@@ -34,83 +34,89 @@ public class RailGraph
     public Line oceanBeachWalk = new Line("Ocean Beach to Zoo Walk");
     public Line twentyStreetWalk = new Line("22nd to 23rd St Walk");
 
-    public Station sjBerryessa = new Station("San Jose Berryessa", "place_BERY");
-    public Station milpitas = new Station("Milpitas", "place_MLPT", "PS_MILP");
-    public Station bayFair = new Station("Bay Fair", "place_BAYF");
-    public Station coliseum = new Station("Coliseum", "place_COLS");
-    public Station macarthur = new Station("MacArthur", "place_MCAR");
-    public Station richmond = new Station("Richmond", "place_RICH");
-    public Station embarcadero = new Station("Embarcadero", "place_EMBR", "Metro Embarcadero Station");
-    public Station powell = new Station("Powell", "place_POWL", "Metro Powell Station/Downtown", "Metro Powell Station/Outbound", "Union Square/Market St Station Northbound", "Union Square/Market St Station Southbound");
-    public Station civicCenter = new Station("Civic Center", "place_CIVC", "Metro Civic Center Station/Downtn", "Metro Civic Center Station/Outbd");
-    public Station balboaPark = new Station("Balboa Park", "place_BALB", "Balboa Park BART/Mezzanine Level", "San Jose Ave & Geneva Ave", "San Jose Ave & Niagra Ave");
-    public Station dalyCity = new Station("Daly City", "place_DALY");
-    public Station antioch = new Station("Antioch", "place_ANTC");
-    public Station millbrae = new Station("Millbrae", "place_MLBR");
-    public Station dublinPleasanton = new Station("Dublin/Pleasanton", "place_DUBL");
-    public Station gilroy = new Station("Gilroy", "gilroy");
-    public Station tamien = new Station("Tamien", "tamien", "PS_TAMN");
-    public Station diridon = new Station("Diridon", "sj_diridon", "PS_DIRD");
-    public Station mountainView = new Station("Mountain View", "mountain_view", "PS_MVTC");
-    public Station bayshore = new Station("Bayshore", "bayshore");
-    public Station southSF = new Station("South San Francisco", "south_sf");
-    public Station sf4thAndKing = new Station("San Francisco 4th & King", "san_francisco", "4th St & King St", "King St & 4th St");
-    public Station sf22nd = new Station("22nd Street", "22nd_street");
-    public Station oldIronsides = new Station("Old Ironsides", "PS_OLDI");
-    public Station champion = new Station("Champion", "PS_CHMP");
-    public Station baypointe = new Station("Baypointe", "PS_BAYP");
-    public Station alumRock = new Station("Alum rock", "PS_ALUM");
-    public Station conventionCenter = new Station("Convention Center", "PS_CONV");
-    public Station winchester = new Station("Winchester", "PS_WINC");
-    public Station santaTeresa = new Station("Santa Teresa", "PS_TRSA");
-    public Station vanNess = new Station("Van Ness", "Metro Van Ness Station", "Van Ness Station Outbound");
-    //public Station duboceAndChurch = new Station("Duboce & Church", "Duboce Ave & Church St", "Church St & Duboce Ave");
-    public Station church = new Station("Church", "Metro Church Station/Outbound", "Metro Church Station/Downtown", "Church St & Market St");
-    public Station westPortal = new Station("West Portal", "West Portal Station");
-    public Station zoo = new Station("SF Zoo", "Wawona/46th Ave /SF Zoo", "47th Ave & Cutler Ave");
-    public Station sloatAndStFrancis = new Station("Sloat & St. Francis", "West Portal/Sloat/St Francis Circle");
-    public Station oceanBeach = new Station("Ocean Beach", "Judah/La Playa/Ocean Beach");
-    public Station chinatown = new Station("Chinatown - Rose Pak", "Chinatown - Rose Pak Station");
-    public Station sf23rd = new Station("23rd Street", "Third Street & 23rd St");
-    public Station sunnydale = new Station("Sunnydale", "Bayshore Blvd & Sunnydale Ave");
+    public Station.Region sanJose = new Station.Region("J");
+    public Station.Region sanFrancisco = new Station.Region("F");
+    public Station.Region eastBay = new Station.Region("E");
 
-    public Station fremont = new Station("fremont", true);
-    public Station sanLeandro = new Station("san leandro", true);
-    public Station fruitvale = new Station("fruitvale", true);
-    public Station westOakland = new Station("west oakland", true);
-    public Station oakland12th = new Station("12th oakland", true);
-    public Station montgomery = new Station("montgomery", true);
-    public Station mission24th = new Station("24th mission", true);
-    public Station sfAirport = new Station("sfo", true);
-    public Station sunnyvale = new Station("sunnyvale", true);
-    public Station paloAlto = new Station("palo alto", true);
-    public Station sanBruno = new Station("san bruno", true);
-    public Station nasa = new Station("nasa", true);
-    public Station tasman = new Station("tasman", true);
-    public Station greatMall = new Station("great mall", true);
-    public Station greatAmerica = new Station("great america", true);
-    public Station sanFernando = new Station("san fernando", true);
-    public Station childrensMuseum = new Station("childrens' museum", true);
-    public Station church24th = new Station("24th church", true);
-    public Station oceanLee = new Station("ocean and lee", true);
-    public Station westPortal14th = new Station("west portal and 14th", true);
-    public Station castro = new Station("castro", true);
-    public Station sfState = new Station("sf state", true);
-    public Station folsom = new Station("folsom", true);
-    public Station brannan4th = new Station("brannan and 4th", true);
-    public Station ucsf = new Station("ucsf", true);
-    public Station williams = new Station("williams", true);
-    public Station taraval = new Station("taraval", true);
-    public Station judah = new Station("judah", true);
-    public Station belmont = new Station("belmont", true);
-    public Station calAve = new Station("california ave", true);
-    public Station santaClara = new Station("santa clara", true);
+    public Station sjBerryessa = new Station(sanJose, "San Jose Berryessa", "place_BERY");
+    public Station milpitas = new Station(sanJose, "Milpitas", "place_MLPT", "PS_MILP");
+    public Station bayFair = new Station(eastBay, "Bay Fair", "place_BAYF");
+    public Station coliseum = new Station(eastBay, "Coliseum", "place_COLS");
+    public Station macarthur = new Station(eastBay, "MacArthur", "place_MCAR");
+    public Station westOakland = new Station(eastBay, "West Oakland", "place_WOAK");
+    public Station oakland12th = new Station(eastBay, "12th St. Oakland", "place_12TH");
+    public Station lakeMeritt = new Station(eastBay, "Lake Meritt", "place_LAKE");
+    public Station richmond = new Station(eastBay, "Richmond", "place_RICH");
+    public Station embarcadero = new Station(sanFrancisco, "Embarcadero", "place_EMBR", "Metro Embarcadero Station");
+    public Station powell = new Station(sanFrancisco, "Powell", "place_POWL", "Metro Powell Station/Downtown", "Metro Powell Station/Outbound", "Union Square/Market St Station Northbound", "Union Square/Market St Station Southbound");
+    public Station civicCenter = new Station(sanFrancisco, "Civic Center", "place_CIVC", "Metro Civic Center Station/Downtn", "Metro Civic Center Station/Outbd");
+    public Station balboaPark = new Station(sanFrancisco, "Balboa Park", "place_BALB", "Balboa Park BART/Mezzanine Level", "San Jose Ave & Geneva Ave", "San Jose Ave & Niagra Ave");
+    public Station dalyCity = new Station(sanFrancisco, "Daly City", "place_DALY");
+    public Station antioch = new Station(eastBay, "Antioch", "place_ANTC");
+    public Station millbrae = new Station(sanFrancisco, "Millbrae", "place_MLBR");
+    public Station dublinPleasanton = new Station(eastBay, "Dublin/Pleasanton", "place_DUBL");
+    public Station gilroy = new Station(sanJose, "Gilroy", "gilroy");
+    public Station tamien = new Station(sanJose, "Tamien", "tamien", "PS_TAMN");
+    public Station diridon = new Station(sanJose, "Diridon", "sj_diridon", "PS_DIRD");
+    public Station mountainView = new Station(sanJose, "Mountain View", "mountain_view", "PS_MVTC");
+    public Station bayshore = new Station(sanFrancisco, "Bayshore", "bayshore");
+    public Station southSF = new Station(sanFrancisco, "South San Francisco", "south_sf");
+    public Station sf4thAndKing = new Station(sanFrancisco, "San Francisco 4th & King", "san_francisco", "4th St & King St", "King St & 4th St");
+    public Station sf22nd = new Station(sanFrancisco, "22nd Street", "22nd_street");
+    public Station oldIronsides = new Station(sanJose, "Old Ironsides", "PS_OLDI");
+    public Station champion = new Station(sanJose, "Champion", "PS_CHMP");
+    public Station baypointe = new Station(sanJose, "Baypointe", "PS_BAYP");
+    public Station alumRock = new Station(sanJose, "Alum rock", "PS_ALUM");
+    public Station conventionCenter = new Station(sanJose, "Convention Center", "PS_CONV");
+    public Station winchester = new Station(sanJose, "Winchester", "PS_WINC");
+    public Station santaTeresa = new Station(sanJose, "Santa Teresa", "PS_TRSA");
+    public Station vanNess = new Station(sanFrancisco, "Van Ness", "Metro Van Ness Station", "Van Ness Station Outbound");
+    //public Station duboceAndChurch = new Station("Duboce & Church", "Duboce Ave & Church St", "Church St & Duboce Ave");
+    public Station church = new Station(sanFrancisco, "Church", "Metro Church Station/Outbound", "Metro Church Station/Downtown", "Church St & Market St");
+    public Station westPortal = new Station(sanFrancisco, "West Portal", "West Portal Station");
+    public Station zoo = new Station(sanFrancisco, "SF Zoo", "Wawona/46th Ave /SF Zoo", "47th Ave & Cutler Ave");
+    public Station sloatAndStFrancis = new Station(sanFrancisco, "Sloat & St. Francis", "West Portal/Sloat/St Francis Circle");
+    public Station oceanBeach = new Station(sanFrancisco, "Ocean Beach", "Judah/La Playa/Ocean Beach");
+    public Station chinatown = new Station(sanFrancisco, "Chinatown - Rose Pak", "Chinatown - Rose Pak Station");
+    public Station sf23rd = new Station(sanFrancisco, "23rd Street", "Third Street & 23rd St");
+    public Station sunnydale = new Station(sanFrancisco, "Sunnydale", "Bayshore Blvd & Sunnydale Ave");
+
+    public Station fremont = new Station(sanJose, "fremont", true);
+    public Station sanLeandro = new Station(eastBay, "san leandro", true);
+    public Station fruitvale = new Station(eastBay, "fruitvale", true);
+    public Station montgomery = new Station(sanFrancisco, "montgomery", true);
+    public Station mission24th = new Station(sanFrancisco, "24th mission", true);
+    public Station sfAirport = new Station(sanFrancisco, "sfo", true);
+    public Station sunnyvale = new Station(sanJose, "sunnyvale", true);
+    public Station paloAlto = new Station(sanJose, "palo alto", true);
+    public Station sanBruno = new Station(sanFrancisco, "san bruno", true);
+    public Station nasa = new Station(sanJose, "nasa", true);
+    public Station tasman = new Station(sanJose, "tasman", true);
+    public Station greatMall = new Station(sanJose, "great mall", true);
+    public Station greatAmerica = new Station(sanJose, "great america", true);
+    public Station sanFernando = new Station(sanJose, "san fernando", true);
+    public Station childrensMuseum = new Station(sanJose, "childrens' museum", true);
+    public Station church24th = new Station(sanFrancisco, "24th church", true);
+    public Station oceanLee = new Station(sanFrancisco, "ocean and lee", true);
+    public Station westPortal14th = new Station(sanFrancisco, "west portal and 14th", true);
+    public Station castro = new Station(sanFrancisco, "castro", true);
+    public Station sfState = new Station(sanFrancisco, "sf state", true);
+    public Station folsom = new Station(sanFrancisco, "folsom", true);
+    public Station brannan4th = new Station(sanFrancisco, "brannan and 4th", true);
+    public Station ucsf = new Station(sanFrancisco, "ucsf", true);
+    public Station williams = new Station(sanFrancisco, "williams", true);
+    public Station taraval = new Station(sanFrancisco, "taraval", true);
+    public Station judah = new Station(sanFrancisco, "judah", true);
+    public Station belmont = new Station(sanJose, "belmont", true);
+    public Station calAve = new Station(sanJose, "california ave", true);
+    public Station santaClara = new Station(sanJose, "santa clara", true);
 
     public void init()
     {
         bartOrange.addStop(richmond, bartRed)
                 .addStop(macarthur, bartYellow)
-                .addMStop(oakland12th)
+                .addStop(oakland12th, bartRed, bartYellow)
+                .addStop(lakeMeritt, bartBlue, bartGreen)
                 .addMStop(fruitvale)
                 .addStop(coliseum)
                 .addMStop(sanLeandro)
@@ -122,8 +128,8 @@ public class RailGraph
 
         bartRed.addStop(richmond, bartOrange)
                 .addStop(macarthur, bartYellow)
-                .addMStop(oakland12th)
-                .addMStop(westOakland)
+                .addStop(oakland12th, bartOrange)
+                .addStop(westOakland, bartGreen, bartBlue)
                 .addStop(embarcadero, muniJ, muniK, muniL, muniM, muniN)
                 .addMStop(montgomery)
                 .addStop(powell, muniT)
@@ -140,7 +146,8 @@ public class RailGraph
                 .addMStop(sanLeandro)
                 .addStop(coliseum)
                 .addMStop(fruitvale)
-                .addMStop(westOakland)
+                .addStop(lakeMeritt, bartOrange)
+                .addStop(westOakland, bartRed, bartYellow)
                 .addStop(embarcadero, muniJ, muniK, muniL, muniM, muniN)
                 .addMStop(montgomery)
                 .addStop(powell, muniT)
@@ -152,8 +159,8 @@ public class RailGraph
 
         bartYellow.addStop(antioch)
                 .addStop(macarthur, bartRed, bartOrange)
-                .addMStop(oakland12th)
-                .addMStop(westOakland)
+                .addStop(oakland12th, bartOrange)
+                .addStop(westOakland, bartGreen, bartBlue)
                 .addStop(embarcadero, muniJ, muniK, muniL, muniM, muniN)
                 .addMStop(montgomery)
                 .addStop(powell, muniT)
@@ -172,7 +179,8 @@ public class RailGraph
                 .addMStop(sanLeandro)
                 .addStop(coliseum)
                 .addMStop(fruitvale)
-                .addMStop(westOakland)
+                .addStop(lakeMeritt, bartOrange)
+                .addStop(westOakland, bartRed, bartYellow)
                 .addStop(embarcadero, muniJ, muniK, muniL, muniM, muniN)
                 .addMStop(montgomery)
                 .addStop(powell, muniT)
@@ -279,16 +287,16 @@ public class RailGraph
                 .addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniL, muniM, muniN)
                 .readTimetable("K", days, muniFile);
 
-        muniL.addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK, muniM, muniN)
-                .addMStop(montgomery)
-                .addStop(powell, muniT)
-                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
-                .addStop(vanNess, muniN)
-                .addStop(church, muniJ)
-                .addMStop(castro)
-                .addStop(westPortal, muniK, muniM)
+        muniL.addStop(zoo, oceanBeachWalk)
                 .addMStop(taraval)
-                .addStop(zoo, oceanBeachWalk)
+                .addStop(westPortal, muniK, muniM)
+                .addMStop(castro)
+                .addStop(church, muniJ)
+                .addStop(vanNess, muniN)
+                .addStop(civicCenter, bartRed, bartYellow, bartGreen, bartBlue)
+                .addStop(powell, muniT)
+                .addMStop(montgomery)
+                .addStop(embarcadero, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK, muniM, muniN)
                 .readTimetable("L", days, muniFile);
 
         muniM.addStop(balboaPark, bartRed, bartYellow, bartGreen, bartBlue, muniJ, muniK)
@@ -409,6 +417,8 @@ public class RailGraph
             }
         }
 
+        startingStop.bfsTime = startingTime;
+
         PriorityQueue<QueueElement> frontier = new PriorityQueue<>();
 
         if (startingStop.line.isWalk)
@@ -443,8 +453,12 @@ public class RailGraph
 
 //            System.out.println(" >> " + stop + " " + time + " from " + stop.bfsFrom + " " + (stop.bfsFrom != null ? stop.bfsFrom.bfsTime : ""));
 
+//            System.out.println(stop + " " + target.name + " " + (stop.station == target) + " " + cur.finished);
             if (stop.station == target)
+            {
+                frontier.clear();
                 cur.finished = true;
+            }
 
             if (cur.finished && !cur.stop.midpoint)
                 return cur.stop;
@@ -483,12 +497,14 @@ public class RailGraph
                     else
                         arriveTime = n.departureTimesBack[stopIndex];
 
+//                    System.out.println("? " + n + " " + arriveTime + " " + n.bfsTime + " " + time);
                     if (arriveTime < n.bfsTime)
                     {
                         if (arriveTime >= time)
                         {
                             n.bfsFrom = stop;
                             n.bfsTime = arriveTime;
+//                            System.out.println("+ " + n);
                             frontier.add(new QueueElement(arriveTime, dir, n, cur.finished));
                             break;
                         }
@@ -551,29 +567,40 @@ public class RailGraph
         ArrayList<ItineraryElement> itinerary = new ArrayList<>();
 
         ArrayList<Station> temp = new ArrayList<>(Station.allStations);
-        ArrayList<Station> remainingStations = new ArrayList<>();
-//        while (!temp.isEmpty())
-//        {
-//            remainingStations.add(temp.remove((int) (r.nextDouble() * temp.size())));
-//        }
+        HashMap<Station.Region, ArrayList<Station>> remainingStationsByRegion = new HashMap<>();
+        while (!temp.isEmpty())
+        {
+            Station s = temp.remove((int) (r.nextDouble() * temp.size()));
+            if (!remainingStationsByRegion.containsKey(s.region))
+                remainingStationsByRegion.put(s.region, new ArrayList<>());
 
-        remainingStations.add(diridon);
-        remainingStations.add(fremont);
-        remainingStations.add(westOakland);
+            remainingStationsByRegion.get(s.region).add(s);
+        }
 
         int time = 0;
-        Line.Stop location = caltrain.stops.get(9);//caltrainGilroy.stops.get(caltrainGilroy.stops.size() - 1);
-        //remainingStations.remove();
+        ArrayList<Station.Region> remainingRegions = new ArrayList<>(Station.Region.regions);
+        Line.Stop location = caltrainGilroy.stops.get(caltrainGilroy.stops.size() - 1);
+        remainingStationsByRegion.get(sanJose).remove(gilroy);
+        location.bfsTime = caltrainGilroy.stops.get(caltrainGilroy.stops.size() - 1).departureTimesBack[0];
         itinerary.add(new ItineraryElement(location.bfsTime, location));
 
-        while (!remainingStations.isEmpty())
+        while (!remainingStationsByRegion.isEmpty())
         {
+            Station.Region region = location.station.region;
+            if (r.nextDouble() < 0.05 || !remainingStationsByRegion.containsKey(region))
+                region = remainingRegions.get((int) (remainingRegions.size() * r.nextDouble()));
+
+            ArrayList<Station> remainingStations = remainingStationsByRegion.get(region);
             Station next = remainingStations.remove(remainingStations.size() - 1);
-            System.out.println("goto " + next.name + " " + next.explored);
+            if (remainingStations.size() == 0)
+            {
+                remainingRegions.remove(region);
+                remainingStationsByRegion.remove(region);
+            }
+//            System.out.println("goto " + next.name);
 
             if (next.explored)
                 continue;
-
 
             Line.Stop result = bfsTo(next, location, time);
             if (result != null && result.bfsFrom != null)
@@ -588,7 +615,7 @@ public class RailGraph
                     if (!result.midpoint)
                         toAdd.add(result);
 
-                    //System.out.println("> " + result);
+//                    System.out.println(formatTime(result.bfsTime) + " > " + result);
                     result.station.explored = true;
                     result = result.bfsFrom;
                 }
@@ -601,11 +628,14 @@ public class RailGraph
             else
             {
                 ArrayList<Station> remaining = new ArrayList<>();
-                for (Station s: remainingStations)
+                for (Station.Region reg: remainingRegions)
                 {
+                    for (Station s : remainingStationsByRegion.get(reg))
+                    {
 //                    System.out.println(s.name + " " + s.explored);
-                    if (!s.explored)
-                        remaining.add(s);
+                        if (!s.explored)
+                            remaining.add(s);
+                    }
                 }
                 if (!next.explored)
                     remaining.add(next);
@@ -621,30 +651,38 @@ public class RailGraph
     {
         init();
 //        System.out.println(caltrainGilroy.stops.size());
-        Line.Stop location = caltrainGilroy.stops.get(caltrainGilroy.stops.size() - 1);
-        Line.Stop dest = bfsTo(winchester, location, 0);
 
-        do
+//        muniL.printTimetable();
+
+        for (Line l: Line.lines)
         {
-            if (!dest.midpoint)
+            System.out.println(l.name);
+            Line.Stop location = l.stops.get(0);
+            Line.Stop dest = bfsTo(l.stops.get(l.stops.size() - 1).station, location, 35000);
+
+            do
+            {
+                //if (!dest.midpoint)
                 System.out.println(dest);
 
-            dest = dest.bfsFrom;
+                dest = dest.bfsFrom;
+            }
+            while (dest != null);
+
+            System.out.println("-------------");
         }
-        while (dest != null);
     }
 
     public static void main(String[] args)
     {
         RailGraph r = new RailGraph();
-//        r.test();
         r.init();
 
         Random seeder = new Random();
 
-        long bestSeed = -2250604172248135272l;//seeder.nextLong();
+        long bestSeed = seeder.nextLong();
         Itinerary itinerary = r.travelingSalesman(new Random(bestSeed));
-        int runs = 0;
+        int runs = 1000000;
         for (int i = 0; i < runs; i++)
         {
             if (i * 100 / runs != (i - 1) * 100 / runs)
