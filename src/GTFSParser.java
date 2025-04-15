@@ -5,10 +5,10 @@ import java.util.*;
 
 public class GTFSParser
 {
-    public static final String folder = "bart";
+    public static final String folder = "vta";
     public static final boolean format_time = true;
 
-    public static void parseStops(Scanner sc, HashMap<String, String> stopsMap, LinkedHashSet<String> stopNames, HashMap<String, String> stopNameTranslation)
+    public static void parseStops(Scanner sc, HashMap<String, String> stopsMap, LinkedHashSet<String> stopNames, HashMap<String, String> stopNameTranslation, HashMap<String, String> stopCoords)
     {
         System.out.println("Parsing stops...");
 
@@ -19,6 +19,8 @@ public class GTFSParser
         int id_index1 = -1;
         int stop_name = -1;
         int stop_name2 = -1;
+        int lat_index = -1;
+        int long_index = -1;
 
         for (int i = 0; i < stopKeys.length; i++)
         {
@@ -27,6 +29,8 @@ public class GTFSParser
                 case "parent_station" -> stop_name = i;
                 case "stop_name" -> stop_name2 = i;
                 case "stop_id" -> id_index1 = i;
+                case "stop_lat" -> lat_index = i;
+                case "stop_lon" -> long_index = i;
             }
         }
 
@@ -50,12 +54,13 @@ public class GTFSParser
 
             stopsMap.put(p[id_index1], name);
             stopNameTranslation.put(name, p[stop_name2]);
+            stopCoords.put(name, p[long_index] + "," + p[lat_index]);
             stopNames.add(name);
         }
 
     }
 
-    public static void parseRoutes(Scanner sc, HashMap<String, String> routes)
+    public static void parseRoutes(Scanner sc, HashMap<String, String> routes, HashMap<String, String> colors)
     {
         System.out.println("Parsing routes...");
 
@@ -64,6 +69,7 @@ public class GTFSParser
 
         int id_index1 = -1;
         int route_index = -1;
+        int color_index = -1;
 
         for (int i = 0; i < routeKeys.length; i++)
         {
@@ -71,6 +77,7 @@ public class GTFSParser
             {
                 case "route_short_name" -> route_index = i;
                 case "route_id" -> id_index1 = i;
+                case "route_color" -> color_index = i;
             }
         }
 
@@ -82,6 +89,7 @@ public class GTFSParser
             String[] p = s.split(",");
 
             routes.put(p[id_index1], p[route_index]);
+            colors.put(p[id_index1], p[color_index]);
         }
     }
 
@@ -229,10 +237,12 @@ public class GTFSParser
 
         HashMap<String, String> stopsMap = new HashMap<>();
         HashMap<String, String> stopsNameTranslations = new HashMap<>();
-        parseStops(new Scanner(GTFSParser.class.getResourceAsStream(folder + "/stops.txt")), stopsMap, stopNames, stopsNameTranslations);
+        HashMap<String, String> stopsCoords = new HashMap<>();
+        parseStops(new Scanner(GTFSParser.class.getResourceAsStream(folder + "/stops.txt")), stopsMap, stopNames, stopsNameTranslations, stopsCoords);
 
         HashMap<String, String> routesMap = new HashMap<>();
-        parseRoutes(new Scanner(GTFSParser.class.getResourceAsStream(folder + "/routes.txt")), routesMap);
+        HashMap<String, String> routeColorsMap = new HashMap<>();
+        parseRoutes(new Scanner(GTFSParser.class.getResourceAsStream(folder + "/routes.txt")), routesMap, routeColorsMap);
 
         HashMap<String, String> tripRouteMap = new HashMap<>();
         HashMap<String, String> tripDirMap = new HashMap<>();
@@ -387,12 +397,17 @@ public class GTFSParser
                         if (!found)
                             continue;
 
+                        int color = Integer.parseInt( routeColorsMap.get(route).trim(), 16);
+                        int r = color / 256 / 256;
+                        int g = (color / 256) % 256;
+                        int b = color % 256;
+
                         if (first)
-                            pw.println(routeName + "/" + dir + "/" + directions.get(route + "," + dir) + "/" + service + "/" + calendar.get(service));
+                            pw.println(routeName + "/" + dir + "/" + directions.get(route + "," + dir) + "/" + service + "/" + calendar.get(service) + "/" + r + "/" + g + "/" + b);
 
                         first = false;
 
-                        pw.print(s.trim() + "," + stopsNameTranslations.get(s).trim() + ",");
+                        pw.print(s.trim() + "," + stopsNameTranslations.get(s).trim() + "," + stopsCoords.get(s) + ",");
                         for (Sortable tt : tripsSorted)
                         {
                             String t = tt.id;

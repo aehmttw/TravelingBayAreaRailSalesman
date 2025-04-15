@@ -5,26 +5,58 @@ import java.util.Scanner;
 public class Line
 {
     public String name;
+    public ArrayList<OfficialStop> officialStops = new ArrayList<>();
     public ArrayList<Stop> stops = new ArrayList<>();
     public ArrayList<Stop> interestingStops = new ArrayList<>();
     public HashMap<Station, Stop> stopsByStation = new HashMap<>();
     public HashMap<String, Stop> stopsByInternalName = new HashMap<>();
 
+    public String timetableForwardName;
+    public String timetableBackName;
+    public String timetableDays;
+    public String timetableFile;
+
+    public int colorR = 127;
+    public int colorG = 127;
+    public int colorB = 127;
+
     public boolean isWalk = false;
     public int walkTime = 0;
 
     public static ArrayList<Line> lines = new ArrayList<>();
+    public static HashMap<String, Line> linesByName = new HashMap<>();
 
     public Line(String name)
     {
         this.name = name;
         lines.add(this);
+        linesByName.put(this.name, this);
+    }
+
+    public static class OfficialStop
+    {
+        public int stopIndex = -1;
+        public int index;
+
+        public double longitude;
+        public double latitude;
+        public String name;
+
+        public boolean explored = false;
+
+        public OfficialStop(String name, double lon, double lat)
+        {
+            this.name = name;
+            this.latitude = lat;
+            this.longitude = lon;
+        }
     }
 
     public static class Stop
     {
         public Station station;
         public int index;
+        public int officialStopIndex;
         public boolean midpoint;
         public Line line;
         public Line[] connections;
@@ -101,10 +133,15 @@ public class Line
 
     public void readTimetable(String forward, String back, String days, String file)
     {
+        this.timetableForwardName = forward;
+        this.timetableBackName = back;
+        this.timetableDays = days;
+        this.timetableFile = "data/" + file;
+
         boolean reading = false;
         boolean direction = false;
 
-        Scanner scan = new Scanner(getClass().getResourceAsStream("data/" + file));
+        Scanner scan = new Scanner(getClass().getResourceAsStream(this.timetableFile));
 
         while (scan.hasNextLine())
         {
@@ -123,6 +160,10 @@ public class Line
                 {
                     reading = true;
                     direction = true;
+
+                    this.colorR = Integer.parseInt(spec[5]);
+                    this.colorG = Integer.parseInt(spec[6]);
+                    this.colorB = Integer.parseInt(spec[7]);
                 }
                 else if (spec[0].equals(back) && spec[1].equals("0"))
                 {
@@ -135,6 +176,14 @@ public class Line
             else if (reading)
             {
                 Stop st = stopsByInternalName.get(sections[0]);
+
+                if (direction)
+                {
+                    OfficialStop os = new OfficialStop(sections[1], Double.parseDouble(sections[2]), Double.parseDouble(sections[3]));
+                    os.index = officialStops.size();
+                    officialStops.add(os);
+                }
+
 //                System.out.println(sections[0] + stopsByInternalName);
                 if (st == null)
                 {
@@ -144,20 +193,24 @@ public class Line
 
 //                System.out.println(st + " " + direction);
 
+                int start = 4;
                 if (direction)
                 {
+                    officialStops.get(officialStops.size() - 1).stopIndex = st.index;
+                    st.officialStopIndex = officialStops.size() - 1;
+
                     if (st.departureTimesForward == null)
-                        st.departureTimesForward = new int[sections.length - 2];
+                        st.departureTimesForward = new int[sections.length - start];
 
                     int prev = -1;
-                    for (int i = 2; i < sections.length; i++)
+                    for (int i = start; i < sections.length; i++)
                     {
                         if (sections[i].equals("null"))
-                            st.departureTimesForward[i - 2] = prev;
+                            st.departureTimesForward[i - start] = prev;
                         else
-                            st.departureTimesForward[i - 2] = Integer.parseInt(sections[i]);
+                            st.departureTimesForward[i - start] = Integer.parseInt(sections[i]);
 
-                        prev = st.departureTimesForward[i - 2];
+                        prev = st.departureTimesForward[i - start];
                     }
 
 //                    System.out.println(st + " -> " + st.departureTimesForward.length);
@@ -165,17 +218,17 @@ public class Line
                 else
                 {
                     if (st.departureTimesBack == null)
-                        st.departureTimesBack = new int[sections.length - 2];
+                        st.departureTimesBack = new int[sections.length - start];
 
                     int prev = -1;
-                    for (int i = 2; i < sections.length; i++)
+                    for (int i = start; i < sections.length; i++)
                     {
                         if (sections[i].equals("null"))
-                            st.departureTimesBack[i - 2] = prev;
+                            st.departureTimesBack[i - start] = prev;
                         else
-                            st.departureTimesBack[i - 2] = Integer.parseInt(sections[i]);
+                            st.departureTimesBack[i - start] = Integer.parseInt(sections[i]);
 
-                        prev = st.departureTimesBack[i - 2];
+                        prev = st.departureTimesBack[i - start];
                     }
 
 //                    System.out.println(st + " <- " + st.departureTimesBack.length);
@@ -236,5 +289,19 @@ public class Line
     {
         this.isWalk = true;
         this.walkTime = time * 60;
+
+        Stop c1 = this.stops.get(0).connections[0].stopsByStation.get(this.stops.get(0).station);
+        Stop c2 = this.stops.get(1).connections[0].stopsByStation.get(this.stops.get(1).station);
+
+        OfficialStop o1 = new OfficialStop(this.stops.get(0).station.name, c1.line.officialStops.get(c1.officialStopIndex).longitude, c1.line.officialStops.get(c1.officialStopIndex).latitude);
+        OfficialStop o2 = new OfficialStop(this.stops.get(1).station.name, c2.line.officialStops.get(c2.officialStopIndex).longitude, c2.line.officialStops.get(c2.officialStopIndex).latitude);
+        o1.stopIndex = 0;
+        o2.stopIndex = 1;
+        this.stops.get(0).officialStopIndex = 0;
+        this.stops.get(1).officialStopIndex = 1;
+
+        this.officialStops.add(o1);
+        this.officialStops.add(o2);
+
     }
 }

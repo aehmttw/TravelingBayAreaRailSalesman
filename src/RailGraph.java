@@ -680,13 +680,13 @@ public class RailGraph
 
         Random seeder = new Random();
 
-        long bestSeed = seeder.nextLong();
+        long bestSeed = 6712661946611465523L; //seeder.nextLong();
         Itinerary itinerary = r.travelingSalesman(new Random(bestSeed));
-        int runs = 1000000;
+        int runs = 0;
         for (int i = 0; i < runs; i++)
         {
-            if (i * 100 / runs != (i - 1) * 100 / runs)
-                System.out.println(i * 100 / runs + "% done");
+            if (i * 100L / runs != (i - 1) * 100L / runs)
+                System.out.println(i * 100L / runs + "% done");
 
             long seed = seeder.nextLong();
             Itinerary attempt = r.travelingSalesman(new Random(seed));
